@@ -60,14 +60,23 @@ class Main {
   + printMenu(): void
 }
 
+class LogService {
+  - File? _logFile
+  
+  + LogService(String logFilePath)
+  + log(String message): Future<void>
+}
+
+
 ' 관계 설정
 
 Main --> TodoView : 사용
 TodoView --> TodoRepositoryImpl : 의존
-TodoRepositoryImpl ..|> TodoRepository : 구현
+TodoRepository ..|> TodoRepositoryImpl : 구현
 TodoRepositoryImpl --> TodoDataSourceImpl : 의존
 TodoDataSourceImpl ..|> TodoDataSource : 구현
 TodoRepositoryImpl --> Todo : 관리
 TodoDataSourceImpl --> Todo : 저장 및 변환
+LogService --> File : 파일에 로그 작성
 
 @enduml
