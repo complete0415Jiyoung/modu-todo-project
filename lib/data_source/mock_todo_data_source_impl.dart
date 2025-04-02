@@ -1,4 +1,10 @@
-[
+import 'dart:convert';
+
+import 'package:todo_app/data_source/todo_data_source.dart';
+
+class MockTodoDatasourceImpl implements TodoDataSource{
+  static const String _mockJsonString = '''
+  [
   {
     "userId": 1,
     "id": 1,
@@ -35,3 +41,18 @@
     "createdAt": "2025-04-02T07:20:00Z"
   }
 ]
+  ''';
+
+  @override
+  Future<List<Map<String, dynamic>>> readTodo() async {
+    final List<dynamic> decoded = json.decode(_mockJsonString);
+    return decoded.map((e) => Map<String, dynamic>.from(e)).toList();
+  }
+
+  @override
+  Future<void> writeTodo(List<Map<String, dynamic>> todos) async {
+   final String encoded = json.encode(todos);
+   print('Mock writeTodo: $encoded');
+  }
+
+}
