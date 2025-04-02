@@ -10,12 +10,14 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<List<Todo>> getTodos() async {
-    final TodoData = await _todoDataSource.readTodo();
+    final List<dynamic> TodoData = await _todoDataSource.readTodo();
+    List<Todo> allTodos = TodoData.map((e) => Todo.fromJson(e)).toList();
+    return allTodos;
   }
 
   @override
-  Future<void> addTodo(String title) {
-    // TODO: implement addTodo
+  Future<void> addTodo(String title) async {
+   // final List<dynamic> addTodo = await TodoRepository().addTodo(title);
     throw UnimplementedError();
   }
 

@@ -7,7 +7,7 @@ class TodoDataSourceImpl implements TodoDataSource {
   final filePath = '';
 
   @override
-  Future<void> readTodo() async {
+  Future<List<Map<String, dynamic>>> readTodo() async {
     try {
       final File jsonFile = File(filePath);
       String jsonFromFile = await jsonFile.readAsString();
@@ -17,6 +17,7 @@ class TodoDataSourceImpl implements TodoDataSource {
       throw FormatException('JSON 파싱오류');
     } catch (e) {
       print('예상치 못한 오류발생 :$e');
+      return [];
     }
   }
 
