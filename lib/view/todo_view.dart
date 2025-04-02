@@ -18,12 +18,13 @@ class TodoView {
       bool isfliter = true;
 
       while (isfliter) {
-        print('🪄필터 ');
-        print('━━━━━━');
+        print('\n  필터');
         print('  ➖  1️⃣  날짜 오름차순으로 보기\n');
         print('  ➖  2️⃣  날짜 내림차순으로 보기\n');
         print('  ➖  3️⃣  완료된 목록보기\n');
         print('  ➖  4️⃣  미완료 목록보기\n');
+
+        stdout.write('💡 필터 번호를 입력해주세요   ➡️   ');
         String? userInput = stdin.readLineSync();
         switch (userInput) {
           case '1':
@@ -47,7 +48,8 @@ class TodoView {
             await logFile.log('목록보기_미완료 목록조회');
             break;
           default:
-            throw ('올바른 값을 입력해주세요');
+            print('⚠️ 올바른 값을 입력해주세요');
+            await logFile.log('목록보기_필터input오류');
         }
       }
 
@@ -66,7 +68,7 @@ class TodoView {
 
   Future<void> addView(logFile) async {
     try {
-      print('[할 일 제목을 입력하세요.]');
+      stdout.write('\n💡 할 일 제목을 입력하세요. : ');
       final String titleInput = stdin.readLineSync().toString().trim();
 
       await _todoRepository.addTodo(titleInput);
@@ -79,13 +81,14 @@ class TodoView {
 
   Future<void> updateView(logFile) async {
     try {
-      print('수정할 할 일 ID를 입력하세요');
+      stdout.write('\n💡 수정할 할 일 ID를 입력하세요  ➡️   ');
       final String idInput = stdin.readLineSync().toString();
 
-      print('새 제목을 입력하세요');
+      stdout.write('\n💡 새 제목을 입력하세요  ➡️   ');
       final String titleInput = stdin.readLineSync().toString().trim();
 
       await _todoRepository.updateTodo(int.parse(idInput), titleInput);
+      print('[$idInput]할 일이 수정되었습니다.');
       await logFile.log('todoId[$idInput]할 일 수정됨');
     } catch (e) {
       rethrow;
@@ -94,7 +97,7 @@ class TodoView {
 
   Future<void> deleteView(logFile) async {
     try {
-      print('삭제할 할 일 ID를 입력하세요');
+      stdout.write('\n💡 삭제할 할 일 ID를 입력하세요 ➡️   ');
       final String idInput = stdin.readLineSync().toString();
 
       await _todoRepository.deleteTodo(int.parse(idInput));
@@ -106,7 +109,7 @@ class TodoView {
 
   Future<void> toggleView(logFile) async {
     try {
-      print('완료 상태를 토글할 할 일 ID를 입력하세요');
+      stdout.write('💡 완료 상태를 토글할 할 일 ID를 입력하세요 ➡️   ');
       final String idInput = stdin.readLineSync().toString();
       await _todoRepository.toggleTodo(int.parse(idInput));
       await logFile.log('todoId[$idInput] 할 일 상태 변경됨');
