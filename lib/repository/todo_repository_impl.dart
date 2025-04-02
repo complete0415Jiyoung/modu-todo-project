@@ -19,9 +19,10 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<void> addTodo(String title) async {
-
     List<Todo> todos;
-    final List<dynamic> TodoData = await _todoDataSource.writeTodo();
+    Todo todo = Todo(title: title, createdAt: DateTime.now())
+    final List<dynamic> TodoData = await _todoDataSource.readTodo();
+    copyWith(T)
    // final List<dynamic> addTodo = await TodoRepository().addTodo(title);
     throw UnimplementedError();
   }
