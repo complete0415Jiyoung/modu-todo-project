@@ -32,7 +32,6 @@ class TodoRepositoryImpl implements TodoRepository {
       final Todo newTodo = lastTodo.copyWith(id: lastTodo.id + 1, title: title);
 
       todoData.add(newTodo.toJson());
-
       _todoDataSource.writeTodo(todoData);
     } catch (e) {
       rethrow;
@@ -56,9 +55,7 @@ class TodoRepositoryImpl implements TodoRepository {
       final Todo updateTodo = targetTodo.copyWith(title: newTitle);
 
       todoData[index] = updateTodo.toJson();
-
       await _todoDataSource.writeTodo(todoData);
-      print('[수정이 완료 되었습니다.]');
     } catch (e) {
       rethrow;
     }
@@ -77,7 +74,6 @@ class TodoRepositoryImpl implements TodoRepository {
       }
 
       await _todoDataSource.writeTodo(todoData);
-      print('[삭제가 완료 되었습니다.]');
     } catch (e) {
       rethrow;
     }
@@ -104,7 +100,6 @@ class TodoRepositoryImpl implements TodoRepository {
       todoData[index] = updateTodo.toJson();
 
       await _todoDataSource.writeTodo(todoData);
-      print('[상태 체크 수정 완료 되었습니다.]');
     } catch (e) {
       rethrow;
     }

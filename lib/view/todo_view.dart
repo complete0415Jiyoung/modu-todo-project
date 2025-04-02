@@ -13,12 +13,13 @@ class TodoView {
 
   Future<void> listView(logFile) async {
     try {
-      bool isfliter = true;
       final List<Todo> todos = await _todoRepository.getTodos();
+
+      bool isfliter = true;
+
       while (isfliter) {
-        print('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
-        print('|              🪄필터              |');
-        print('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
+        print('🪄필터 ');
+        print('━━━━━━');
         print('  ➖  1️⃣  날짜 오름차순으로 보기\n');
         print('  ➖  2️⃣  날짜 내림차순으로 보기\n');
         print('  ➖  3️⃣  완료된 목록보기\n');
@@ -27,19 +28,23 @@ class TodoView {
         switch (userInput) {
           case '1':
             todos.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+            await logFile.log('목록보기_날짜 오름차순으로 조회');
             isfliter = false;
             break;
           case '2':
             todos.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+            await logFile.log('목록보기_날짜 내림차순으로 조회');
             isfliter = false;
             break;
           case '3':
             todos.retainWhere((e) => e.completed == true); // 원본수정
+            await logFile.log('목록보기_완료목록으로 조회');
             isfliter = false;
             break;
           case '4':
             todos.retainWhere((e) => e.completed == false);
             isfliter = false;
+            await logFile.log('목록보기_미완료 목록조회');
             break;
           default:
             throw ('올바른 값을 입력해주세요');
@@ -49,9 +54,10 @@ class TodoView {
       print('ID |   TITLE   | CREAT_DATE ');
       for (int i = 0; i < todos.length; i++) {
         print(
-          '${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${DateFormat('yyyy-MM-dd HH:mm:ss').format(todos[i].createdAt)})',
+          '[${i + 1}] ${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${DateFormat('yyyy-MM-dd HH:mm:ss').format(todos[i].createdAt)})',
         );
       }
+
       print('--------------------------------------------------');
     } catch (e) {
       rethrow;

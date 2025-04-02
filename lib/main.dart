@@ -20,24 +20,19 @@ void main() async {
           await TodoView().listView(logFile);
           break;
         case '2':
-          print('할 일 추가');
           await TodoView().addView(logFile);
           break;
         case '3':
-          print('할 일 수정');
           await TodoView().updateView(logFile);
           break;
         case '4':
-          print('완료 상태 체크');
           await TodoView().toggleView(logFile);
           break;
         case '5':
-          print('할 일 삭제');
           await TodoView().deleteView(logFile);
           break;
         case '0':
           print('종료');
-          await logFile.log('앱 종료됨');
           isFlag = false;
           break;
         default:
@@ -50,9 +45,6 @@ void main() async {
 }
 
 void printMenu() {
-  print('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
-  print('|          📝 TO-DO LIST          |');
-  print('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
   print('\n  번호/항목 \n');
   print('   1️⃣  👀 목록 보기        \n');
   print('   2️⃣  ➕ 할 일 추가       \n');
