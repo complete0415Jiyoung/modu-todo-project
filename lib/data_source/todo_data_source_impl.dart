@@ -7,12 +7,15 @@ class TodoDataSourceImpl implements TodoDataSource {
   final filePath = '${Directory.current.path}/lib/json_data/todo_data.json';
 
   @override
-  Future<List<dynamic>> readTodo() async {
+  Future<List<Map<String, dynamic>>> readTodo() async {
     try {
       final File jsonFile = File(filePath);
-      String jsonFromFile = await jsonFile.readAsString();
 
-      return jsonDecode(jsonFromFile);
+      final String jsonFromFile = await jsonFile.readAsString();
+
+      final List jsonData = jsonDecode(jsonFromFile);
+
+      return jsonData.cast<Map<String, dynamic>>();
     } on FileSystemException {
       throw FormatException('JSON 파싱오류');
     } catch (e) {

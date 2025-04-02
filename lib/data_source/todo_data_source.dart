@@ -1,4 +1,4 @@
 abstract interface class TodoDataSource {
   Future<void> writeTodo(List<Map<String, dynamic>> todos);
-  Future<List<dynamic>> readTodo();
+  Future<List<Map<String, dynamic>>> readTodo();
 }
