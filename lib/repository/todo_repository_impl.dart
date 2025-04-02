@@ -78,11 +78,9 @@ class TodoRepositoryImpl implements TodoRepository {
       return;
     }
 
-    if ()
-
     final Todo targetTodo = Todo.fromJson(todoData[index]);
 
-    final Todo updateTodo = targetTodo.copyWith(completed: true);
+     final Todo updateTodo = targetTodo.copyWith(completed: targetTodo.completed == false?true : false);
 
     todoData[index] = updateTodo.toJson();
 

@@ -25,6 +25,7 @@ void main() async {
         break;
       case '4':
         print('완료 상태 체크');
+        await TodoView().toggleView();
         break;
       case '5':
         print('할 일 삭제');

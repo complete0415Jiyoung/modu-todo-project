@@ -46,4 +46,10 @@ class TodoView {
 
     await _todoRepository.deleteTodo(int.parse(idInput));
   }
+
+  Future<void> toggleView() async {
+    print('완료 상태를 토글할 할 일 ID를 입력하세요');
+    final String idInput = stdin.readLineSync().toString();
+    await _todoRepository.toggleTodo(int.parse(idInput));
+  }
 }
