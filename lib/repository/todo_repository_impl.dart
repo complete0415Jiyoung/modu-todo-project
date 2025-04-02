@@ -70,9 +70,11 @@ class TodoRepositoryImpl implements TodoRepository {
       final List<Map<String, dynamic>> todoData =
           await _todoDataSource.readTodo();
 
-      int index = todoData.indexWhere((e) => e['id'] == id);
+      todoData.removeWhere((e) => e['id'] == id);
 
-      todoData.removeAt(index);
+      for (int i = 0; i < todoData.length; i++) {
+        todoData[i]['id'] = i + 1;
+      }
 
       await _todoDataSource.writeTodo(todoData);
       print('[삭제가 완료 되었습니다.]');
