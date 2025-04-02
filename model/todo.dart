@@ -23,9 +23,7 @@ class Todo {
     };
   }
 
-  factory Todo.fromJson(Map<String, dynamic> json){
-    return Todo
-  }
+
 
   @override
   bool operator ==(Object other) =>
