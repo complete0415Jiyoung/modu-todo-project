@@ -36,7 +36,20 @@ class TodoRepositoryImpl implements TodoRepository {
     final List<Map<String, dynamic>> todoData =
         await _todoDataSource.readTodo();
 
-    todoData.indexWhere((e) => e[id] == id);
+    int index = todoData.indexWhere((e) => e['id'] == id);
+
+    if (index == -1) {
+      print('해당 아이디가 존재하지 않습니다.');
+      return;
+    }
+
+    final Todo targetTodo = Todo.fromJson(todoData[index]);
+
+    final Todo updateTodo = targetTodo.copyWith(title: newTitle);
+
+    todoData[index] = updateTodo.toJson();
+
+    await _todoDataSource.writeTodo(todoData);
   }
 
   @override

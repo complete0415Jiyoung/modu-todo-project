@@ -15,7 +15,7 @@ class TodoView {
     print('[할 일 목록]');
     for (int i = 0; i < todos.length; i++) {
       print(
-        '${i + 1}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${todos[i].createdAt})',
+        '${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${todos[i].createdAt})',
       );
     }
     print('--------------------------------------------------');
@@ -29,12 +29,14 @@ class TodoView {
 
     print('--------------------------------------------------');
   }
-}
 
-Future<void> updateView() async {
-  print('수정할 할 일 ID를 입력하세요');
-  final String idInput = stdin.readLineSync().toString().trim();
+  Future<void> updateView() async {
+    print('수정할 할 일 ID를 입력하세요');
+    final String idInput = stdin.readLineSync().toString();
 
-  print('새 제목을 입력하세요');
-  final String titleInput = stdin.readLineSync().toString().trim();
+    print('새 제목을 입력하세요');
+    final String titleInput = stdin.readLineSync().toString().trim();
+
+    await _todoRepository.updateTodo(int.parse(idInput), titleInput);
+  }
 }

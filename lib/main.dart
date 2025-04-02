@@ -13,14 +13,15 @@ void main() async {
     switch (userInput) {
       case '1':
         print('목록보기');
-       await TodoView().listView();
+        await TodoView().listView();
         break;
       case '2':
         print('할 일 추가');
-      await  TodoView().addView();
+        await TodoView().addView();
         break;
       case '3':
         print('할 일 수정');
+        await TodoView().updateView();
         break;
       case '4':
         print('완료 상태 체크');
