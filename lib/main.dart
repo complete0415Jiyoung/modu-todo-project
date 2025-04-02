@@ -1,5 +1,10 @@
 import 'dart:io';
 
+import 'package:todo_app/repository/todo_repository.dart';
+import 'package:todo_app/view/todo_list_view.dart';
+import 'data_source/todo_data_source_impl.dart';
+import 'repository/todo_repository_impl.dart';
+
 void main() async {
   bool isFlag = true;
 
@@ -11,6 +16,7 @@ void main() async {
     switch (userInput) {
       case '1':
         print('목록보기');
+        TodoListView();
         break;
       case '2':
         print('할 일 추가');
@@ -26,16 +32,14 @@ void main() async {
         break;
       case '0':
         print('종료');
+        isFlag = false;
         break;
       default:
         print('똑바로해');
     }
   }
 
-  // final TodoRepository todoRepository = TodoRepositoryImpl(
-  //   TodoDataSourceImpl(),
-  // );
-  // print(await todoRepository.getTodos());
+
 }
 
 void printMeun() {

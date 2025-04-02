@@ -54,7 +54,7 @@ class Todo {
 
   @override
   String toString() {
-    return 'Todo{userId: $userId, id: $id, title: $title, completed: $completed, createdAt: $createdAt}';
+    return '{title: $title, completed: $completed, createdAt: $createdAt}\n';
   }
 
   Todo copyWith({
