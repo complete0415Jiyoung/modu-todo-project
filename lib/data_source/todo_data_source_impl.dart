@@ -7,7 +7,7 @@ class TodoDataSourceImpl implements TodoDataSource {
   final filePath = '';
 
   @override
-  Future<void> readTodo(Map<String, dynamic> todo) async {
+  Future<void> readTodo() async {
     try {
       final File jsonFile = File(filePath);
       String jsonFromFile = await jsonFile.readAsString();
@@ -21,8 +21,9 @@ class TodoDataSourceImpl implements TodoDataSource {
   }
 
   @override
-  Future<void> writeTodo(List<Map<String, dynamic>> todos) {
-    // TODO: implement writeTodo
-    throw UnimplementedError();
+  Future<void> writeTodo(List<Map<String, dynamic>> todos) async {
+    try {
+      final File jsonFile = File(filePath);
+    } catch (e) {}
   }
 }
