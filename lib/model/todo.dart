@@ -29,7 +29,7 @@ class Todo {
       id: json['id'],
       title: json['title'],
       completed: json['completed'],
-      createdAt: json['createdAt'],
+      createdAt: DateTime.parse(json['createdAt']),
     );
   }
 
