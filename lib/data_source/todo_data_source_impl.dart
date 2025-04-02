@@ -19,8 +19,7 @@ class TodoDataSourceImpl implements TodoDataSource {
     } on FileSystemException {
       throw FormatException('JSON 파싱오류');
     } catch (e) {
-      print('예상치 못한 오류발생 :$e');
-      return [];
+      rethrow;
     }
   }
 
@@ -32,7 +31,7 @@ class TodoDataSourceImpl implements TodoDataSource {
     } on FileSystemException {
       throw FormatException('JSON 파싱오류');
     } catch (e) {
-      print('예상치 못한 오류발생 :$e');
+      rethrow;
     }
   }
 }
