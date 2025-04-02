@@ -16,7 +16,9 @@ class TodoView {
       bool isfliter = true;
       final List<Todo> todos = await _todoRepository.getTodos();
       while (isfliter) {
-        print('\n 🪄필터  \n');
+        print('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
+        print('|              🪄필터              |');
+        print('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
         print('  ➖  1️⃣  날짜 오름차순으로 보기\n');
         print('  ➖  2️⃣  날짜 내림차순으로 보기\n');
         print('  ➖  3️⃣  완료된 목록보기\n');
@@ -32,11 +34,11 @@ class TodoView {
             isfliter = false;
             break;
           case '3':
-            todos.where((e) => e.completed == true).toList();
+            todos.retainWhere((e) => e.completed == true); // 원본수정
             isfliter = false;
             break;
           case '4':
-            todos.where((e) => e.completed == false).toList();
+            todos.retainWhere((e) => e.completed == false);
             isfliter = false;
             break;
           default:
