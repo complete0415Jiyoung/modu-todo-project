@@ -6,6 +6,10 @@ import 'package:todo_app/repository/todo_repository.dart';
 import 'package:todo_app/repository/todo_repository_impl.dart';
 
 class TodoView {
+  final TodoRepository todoRepository = TodoRepositoryImpl(
+    TodoDataSourceImpl(),
+  );
+
   void listView(List<Todo> todos) {
     print('[할 일 목록]');
     for (int i = 0; i < todos.length; i++) {
@@ -16,9 +20,15 @@ class TodoView {
     print('--------------------------------------------------');
   }
 
-  void addView() {
+  void addView() async {
     print('[할 일 제목을 입력하세요.]');
-    final titleInput = stdin.readLineSync();
+    final String titleInput = stdin.readLineSync().trim();
+
+    if (titleInput != null) {
+      await todoRepository.addTodo(titleInput);
+    } else {
+      print('똑바로해');
+    }
 
     print('--------------------------------------------------');
   }

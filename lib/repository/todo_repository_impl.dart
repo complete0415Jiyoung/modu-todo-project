@@ -12,19 +12,23 @@ class TodoRepositoryImpl implements TodoRepository {
 
   @override
   Future<List<Todo>> getTodos() async {
-    final List<dynamic> TodoData = await _todoDataSource.readTodo();
-    List<Todo> allTodos = TodoData.map((e) => Todo.fromJson(e)).toList();
+    final List<dynamic> todoData = await _todoDataSource.readTodo();
+    List<Todo> allTodos = todoData.map((e) => Todo.fromJson(e)).toList();
     return allTodos;
   }
 
   @override
   Future<void> addTodo(String title) async {
-    List<Todo> todos;
-    Todo todo = Todo(title: title, createdAt: DateTime.now())
-    final List<dynamic> TodoData = await _todoDataSource.readTodo();
-    copyWith(T)
-   // final List<dynamic> addTodo = await TodoRepository().addTodo(title);
-    throw UnimplementedError();
+    final List<Map<String, dynamic>> todoData =
+        await _todoDataSource.readTodo();
+
+    final Todo lastTodo = Todo.fromJson(todoData.last);
+
+    final Todo newTodo = lastTodo.copyWith(id: lastTodo.id + 1, title: title);
+
+    todoData.add(newTodo as Map<String, dynamic>);
+
+    _todoDataSource.writeTodo(todoData);
   }
 
   @override

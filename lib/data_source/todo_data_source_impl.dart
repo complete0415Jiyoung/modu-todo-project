@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:js_interop';
 
 import 'package:todo_app/data_source/todo_data_source.dart';
 
@@ -28,6 +29,11 @@ class TodoDataSourceImpl implements TodoDataSource {
   Future<void> writeTodo(List<Map<String, dynamic>> todos) async {
     try {
       final File jsonFile = File(filePath);
-    } catch (e) {}
+      await jsonFile.writeAsString(jsonEncode(todos));
+    } on FileSystemException {
+      throw FormatException('JSON 파싱오류');
+    } catch (e) {
+      print('예상치 못한 오류발생 :$e');
+    }
   }
 }

@@ -68,8 +68,8 @@ class Todo {
       userId: userId ?? this.userId,
       id: id ?? this.id,
       title: title ?? this.title,
-      completed: completed ?? this.completed,
-      createdAt: createdAt ?? this.createdAt,
+      completed: false,
+      createdAt: DateTime.now(),
     );
   }
 }
