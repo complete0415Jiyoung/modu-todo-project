@@ -21,7 +21,7 @@ class TodoView {
     print('--------------------------------------------------');
   }
 
- Future<void>  addView() async {
+  Future<void> addView() async {
     print('[할 일 제목을 입력하세요.]');
     final String titleInput = stdin.readLineSync().toString().trim();
 
@@ -29,4 +29,12 @@ class TodoView {
 
     print('--------------------------------------------------');
   }
+}
+
+Future<void> updateView() async {
+  print('수정할 할 일 ID를 입력하세요');
+  final String idInput = stdin.readLineSync().toString().trim();
+
+  print('새 제목을 입력하세요');
+  final String titleInput = stdin.readLineSync().toString().trim();
 }

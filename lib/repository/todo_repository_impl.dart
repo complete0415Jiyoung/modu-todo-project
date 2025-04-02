@@ -32,6 +32,14 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
+  Future<void> updateTodo(int id, String newTitle) async {
+    final List<Map<String, dynamic>> todoData =
+        await _todoDataSource.readTodo();
+
+    todoData.indexWhere((e) => e[id] == id);
+  }
+
+  @override
   Future<void> deleteTodo(int id) {
     // TODO: implement deleteTodo
     throw UnimplementedError();
@@ -40,12 +48,6 @@ class TodoRepositoryImpl implements TodoRepository {
   @override
   Future<void> toggleTodo(int id) {
     // TODO: implement toggleTodo
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateTodo(int id, String newTitle) {
-    // TODO: implement updateTodo
     throw UnimplementedError();
   }
 }
