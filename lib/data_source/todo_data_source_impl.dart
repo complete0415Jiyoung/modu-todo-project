@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:todo_app/data_source/todo_data_source.dart';
 
 class TodoDataSourceImpl implements TodoDataSource {
-  final filePath = '';
+  final filePath = '${Directory.current.path}/lib/json_data/todo_data.json';
 
   @override
   Future<List<Map<String, dynamic>>> readTodo() async {
