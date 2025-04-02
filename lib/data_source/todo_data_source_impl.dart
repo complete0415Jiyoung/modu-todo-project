@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:todo_app/data_source/todo_data_source.dart';
+
 class TodoDataSourceImpl implements TodoDataSource {
   final filePath = '${Directory.current.path}/lib/json_data/todo_data.json';
 
@@ -18,8 +19,7 @@ class TodoDataSourceImpl implements TodoDataSource {
     } on FileSystemException {
       throw FormatException('JSON 파싱오류');
     } catch (e) {
-      print('예상치 못한 오류발생 :$e');
-      return [];
+      rethrow;
     }
   }
 
@@ -31,8 +31,7 @@ class TodoDataSourceImpl implements TodoDataSource {
     } on FileSystemException {
       throw FormatException('JSON 파싱오류');
     } catch (e) {
-      print('예상치 못한 오류발생 :$e');
+      rethrow;
     }
   }
 }
-

@@ -4,49 +4,52 @@ import 'package:todo_app/log_service.dart';
 import 'package:todo_app/view/todo_view.dart';
 
 void main() async {
-  bool isFlag = true;
+  final LogService logFile = LogService('${Directory.current.path}/log.txt');
+  try {
+    bool isFlag = true;
 
-  LogService logFile = LogService('${Directory.current.path}/log.txt');
+    await logFile.log('앱 시작됨');
 
-  await logFile.log('앱 시작됨');
+    while (isFlag) {
+      printMenu();
 
-  while (isFlag) {
-    printMeun();
+      String? userInput = stdin.readLineSync();
 
-    String? userInput = stdin.readLineSync();
-
-    switch (userInput) {
-      case '1':
-        await TodoView().listView(logFile);
-        break;
-      case '2':
-        print('할 일 추가');
-        await TodoView().addView(logFile);
-        break;
-      case '3':
-        print('할 일 수정');
-        await TodoView().updateView(logFile);
-        break;
-      case '4':
-        print('완료 상태 체크');
-        await TodoView().toggleView(logFile);
-        break;
-      case '5':
-        print('할 일 삭제');
-        await TodoView().deleteView(logFile);
-        break;
-      case '0':
-        print('종료');
-        await logFile.log('앱 종료됨');
-        isFlag = false;
-        break;
-      default:
-        await logFile.log('에러발생 : 올바른 메뉴 버튼을 입력해주세요');
+      switch (userInput) {
+        case '1':
+          await TodoView().listView(logFile);
+          break;
+        case '2':
+          print('할 일 추가');
+          await TodoView().addView(logFile);
+          break;
+        case '3':
+          print('할 일 수정');
+          await TodoView().updateView(logFile);
+          break;
+        case '4':
+          print('완료 상태 체크');
+          await TodoView().toggleView(logFile);
+          break;
+        case '5':
+          print('할 일 삭제');
+          await TodoView().deleteView(logFile);
+          break;
+        case '0':
+          print('종료');
+          await logFile.log('앱 종료됨');
+          isFlag = false;
+          break;
+        default:
+          throw ('올바른 메뉴 버튼을 입력해주세요');
+      }
     }
+  } catch (e) {
+    await logFile.log('예외발생: $e');
   }
 }
 
-void printMeun() {
+void printMenu() {
   print('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓');
   print('|          📝 TO-DO LIST          |');
   print('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛');
