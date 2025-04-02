@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:todo_app/data_source/todo_data_source.dart';
 import 'package:todo_app/repository/todo_repository.dart';
 import 'package:todo_app/repository/todo_repository_impl.dart';
@@ -8,12 +10,14 @@ void main() async {
 
   while (isFlag) {
     printMeun();
+
+    String? userInput = stdin.readLineSync();
   }
 
-  final TodoRepository todoRepository = TodoRepositoryImpl(
-    TodoDataSourceImpl(),
-  );
-  print(await todoRepository.getTodos());
+  // final TodoRepository todoRepository = TodoRepositoryImpl(
+  //   TodoDataSourceImpl(),
+  // );
+  // print(await todoRepository.getTodos());
 }
 
 void printMeun() {
