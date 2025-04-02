@@ -12,7 +12,8 @@ class TodoView {
 
   Future<void> listView() async {
     final List<Todo> todos = await _todoRepository.getTodos();
-    print('[할 일 목록]');
+    print('ID |   TITLE   | CREAT_DATE ');
+
     for (int i = 0; i < todos.length; i++) {
       print(
         '${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${todos[i].createdAt})',
