@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:intl/intl.dart';
 import 'package:todo_app/data_source/todo_data_source_impl.dart';
 import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/repository/todo_repository.dart';
@@ -12,12 +13,41 @@ class TodoView {
 
   Future<void> listView(logFile) async {
     try {
+      bool isfliter = true;
       final List<Todo> todos = await _todoRepository.getTodos();
-      print('ID |   TITLE   | CREAT_DATE ');
+      while (isfliter) {
+        print('\n 🪄필터  \n');
+        print('  ➖  1️⃣  날짜 오름차순으로 보기\n');
+        print('  ➖  2️⃣  날짜 내림차순으로 보기\n');
+        print('  ➖  3️⃣  완료된 목록보기\n');
+        print('  ➖  4️⃣  미완료 목록보기\n');
+        String? userInput = stdin.readLineSync();
+        switch (userInput) {
+          case '1':
+            todos.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+            isfliter = false;
+            break;
+          case '2':
+            todos.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+            isfliter = false;
+            break;
+          case '3':
+            todos.where((e) => e.completed == true).toList();
+            isfliter = false;
+            break;
+          case '4':
+            todos.where((e) => e.completed == false).toList();
+            isfliter = false;
+            break;
+          default:
+            throw ('올바른 값을 입력해주세요');
+        }
+      }
 
+      print('ID |   TITLE   | CREAT_DATE ');
       for (int i = 0; i < todos.length; i++) {
         print(
-          '${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${todos[i].createdAt})',
+          '${todos[i].id}. [${todos[i].completed ? 'X' : ' '}] ${todos[i].title}(${DateFormat('yyyy-MM-dd HH:mm:ss').format(todos[i].createdAt)})',
         );
       }
       print('--------------------------------------------------');
