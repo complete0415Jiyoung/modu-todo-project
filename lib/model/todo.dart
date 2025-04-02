@@ -19,7 +19,7 @@ class Todo {
       'id': id,
       'title': title,
       'completed': completed,
-      'createdAt': createdAt,
+      'createdAt': createdAt.toString(),
     };
   }
 

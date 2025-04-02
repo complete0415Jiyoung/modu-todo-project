@@ -10,7 +10,7 @@ class TodoView {
     TodoDataSourceImpl(),
   );
 
-  void listView() async {
+  Future<void> listView() async {
     final List<Todo> todos = await _todoRepository.getTodos();
     print('[할 일 목록]');
     for (int i = 0; i < todos.length; i++) {
@@ -21,7 +21,7 @@ class TodoView {
     print('--------------------------------------------------');
   }
 
-  void addView() async {
+ Future<void>  addView() async {
     print('[할 일 제목을 입력하세요.]');
     final String titleInput = stdin.readLineSync().toString().trim();
 

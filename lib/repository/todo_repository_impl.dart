@@ -26,7 +26,7 @@ class TodoRepositoryImpl implements TodoRepository {
 
     final Todo newTodo = lastTodo.copyWith(id: lastTodo.id + 1, title: title);
 
-    todoData.add(newTodo as Map<String, dynamic>);
+    todoData.add(newTodo.toJson());
 
     _todoDataSource.writeTodo(todoData);
   }
