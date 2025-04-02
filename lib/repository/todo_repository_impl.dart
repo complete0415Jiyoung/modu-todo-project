@@ -47,6 +47,7 @@ class TodoRepositoryImpl implements TodoRepository {
       int index = todoData.indexWhere((e) => e['id'] == id);
 
       if (index == -1) {
+        print('‼️ 해당 아이디가 존재하지 않습니다.');
         throw ('해당 아이디가 존재하지 않습니다.');
       }
 
@@ -70,6 +71,7 @@ class TodoRepositoryImpl implements TodoRepository {
       int index = todoData.indexWhere((e) => e['id'] == id);
 
       if (index == -1) {
+        print('‼️ 해당 아이디가 존재하지 않습니다.');
         throw ('해당 아이디가 존재하지 않습니다.');
       }
 

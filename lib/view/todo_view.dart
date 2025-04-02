@@ -88,8 +88,9 @@ class TodoView {
       final String titleInput = stdin.readLineSync().toString().trim();
 
       await _todoRepository.updateTodo(int.parse(idInput), titleInput);
-      print('[$idInput]할 일이 수정되었습니다.');
+
       await logFile.log('todoId[$idInput]할 일 수정됨');
+      print('[$idInput]할 일이 수정되었습니다.');
     } catch (e) {
       rethrow;
     }
@@ -102,6 +103,7 @@ class TodoView {
 
       await _todoRepository.deleteTodo(int.parse(idInput));
       await logFile.log('todoId[$idInput] 할 일 삭제됨');
+      print('[$idInput] 할 일 삭제되었습니다');
     } catch (e) {
       rethrow;
     }
