@@ -13,30 +13,44 @@ class Todo {
     required this.createdAt,
   });
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      'userId' : userId,
-      'id' : id,
-    'title' : title,
-      'completed' : completed,
-      'createdAt' : createdAt
+      'userId': userId,
+      'id': id,
+      'title': title,
+      'completed': completed,
+      'createdAt': createdAt,
     };
   }
 
-
+  factory Todo.fromJson(Map<String, dynamic> json) {
+    return Todo(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+      completed: json['completed'],
+      createdAt: json['createdAt'],
+    );
+  }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Todo && runtimeType == other.runtimeType &&
-              userId == other.userId && id == other.id &&
-              title == other.title && completed == other.completed &&
-              createdAt == other.createdAt;
+      other is Todo &&
+          runtimeType == other.runtimeType &&
+          userId == other.userId &&
+          id == other.id &&
+          title == other.title &&
+          completed == other.completed &&
+          createdAt == other.createdAt;
 
   @override
   int get hashCode =>
-      userId.hashCode ^ id.hashCode ^ title.hashCode ^ completed
-          .hashCode ^ createdAt.hashCode;
+      userId.hashCode ^
+      id.hashCode ^
+      title.hashCode ^
+      completed.hashCode ^
+      createdAt.hashCode;
 
   @override
   String toString() {
@@ -58,5 +72,4 @@ class Todo {
       createdAt: createdAt ?? this.createdAt,
     );
   }
-
 }
