@@ -39,4 +39,11 @@ class TodoView {
 
     await _todoRepository.updateTodo(int.parse(idInput), titleInput);
   }
+
+  Future<void> deleteView() async {
+    print('삭제할 할 일 ID를 입력하세요');
+    final String idInput = stdin.readLineSync().toString();
+
+    await _todoRepository.deleteTodo(int.parse(idInput));
+  }
 }

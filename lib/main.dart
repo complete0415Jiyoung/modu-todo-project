@@ -28,6 +28,7 @@ void main() async {
         break;
       case '5':
         print('할 일 삭제');
+        await TodoView().deleteView();
         break;
       case '0':
         print('종료');

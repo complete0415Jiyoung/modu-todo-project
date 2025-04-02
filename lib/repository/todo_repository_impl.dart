@@ -50,17 +50,43 @@ class TodoRepositoryImpl implements TodoRepository {
     todoData[index] = updateTodo.toJson();
 
     await _todoDataSource.writeTodo(todoData);
+    print('[수정이 완료 되었습니다.]');
   }
 
   @override
-  Future<void> deleteTodo(int id) {
-    // TODO: implement deleteTodo
-    throw UnimplementedError();
+  Future<void> deleteTodo(int id) async {
+    final List<Map<String, dynamic>> todoData =
+        await _todoDataSource.readTodo();
+
+    int index = todoData.indexWhere((e) => e['id'] == id);
+
+    todoData.removeAt(index);
+
+    await _todoDataSource.writeTodo(todoData);
+    print('[삭제가 완료 되었습니다.]');
   }
 
   @override
-  Future<void> toggleTodo(int id) {
-    // TODO: implement toggleTodo
-    throw UnimplementedError();
+  Future<void> toggleTodo(int id) async {
+    final List<Map<String, dynamic>> todoData =
+        await _todoDataSource.readTodo();
+
+    int index = todoData.indexWhere((e) => e['id'] == id);
+
+    if (index == -1) {
+      print('해당 아이디가 존재하지 않습니다.');
+      return;
+    }
+
+    if ()
+
+    final Todo targetTodo = Todo.fromJson(todoData[index]);
+
+    final Todo updateTodo = targetTodo.copyWith(completed: true);
+
+    todoData[index] = updateTodo.toJson();
+
+    await _todoDataSource.writeTodo(todoData);
+    print('[상태 체크 수정 완료 되었습니다.]');
   }
 }
