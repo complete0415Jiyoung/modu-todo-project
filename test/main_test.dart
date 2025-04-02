@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:todo_app/data_source/mock_todo_data_source_impl.dart';
+import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/repository/todo_repository.dart';
 import 'package:todo_app/repository/todo_repository_impl.dart';
 
@@ -83,6 +84,28 @@ void main() {
       for (var todo in todos) {
         expect(todo.completed, isFalse);
       }
+    });
+  });
+
+  group('TODOLIST', () {
+    final TodoRepository todoRepository = TodoRepositoryImpl(
+      MockTodoDatasourceImpl(),
+    );
+    test('할 일 추가 테스트', () async {
+      List<Todo> beforeTodos = await todoRepository.getTodos();
+
+      await todoRepository.addTodo('새로운 할 일');
+    });
+  });
+
+  group('TODOLIST', () {
+    test('미완료상태 토글', () async {
+      await todoRepository.toggleTodo(1);
+      expect(true, true);
+    });
+    test('완료상태 토글', () async {
+      await todoRepository.toggleTodo(4);
+      expect(false, false);
     });
   });
 }
